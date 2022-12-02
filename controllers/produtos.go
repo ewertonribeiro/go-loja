@@ -61,5 +61,17 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		id := r.FormValue("id")
+		nome := r.FormValue("nome")
+		descricao := r.FormValue("descricao")
+		preco := r.FormValue("preco")
+		quantidade := r.FormValue("quantidade")
+
+		models.UpdateProduct(id, nome, descricao, preco, quantidade)
+
+	}
+
+	http.Redirect(w, r, "/", 301)
 
 }

@@ -13,7 +13,7 @@ func GetAllProducts() []Produto {
 	db := db.ConnectDB()
 	defer db.Close()
 
-	rows, err := db.Query("SELECT * FROM produtos")
+	rows, err := db.Query("SELECT * FROM produtos ORDER BY id DESC")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -100,4 +100,17 @@ func GetProductById(id string) Produto {
 		product.Preco = preco
 	}
 	return product
+}
+
+func UpdateProduct(id, nome, descricao, preco, quantidade string) {
+	db := db.ConnectDB()
+	defer db.Close()
+
+	update, err := db.Prepare("UPDATE produtos SET nome=$1, descricao=$2, preco=$3, quantidade=$4 WHERE id=$5")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	update.Exec(nome, descricao, preco, quantidade, id)
+
 }
