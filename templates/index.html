@@ -18,16 +18,16 @@
             </tr>
           </thead>
           <tbody>
-            <!-- {{range .}} -->
-            <!-- <tr> -->
-            <!--     <td>{{.Nome}}</td> -->
-            <!--     <td>{{.Descricao}}</td> -->
-            <!--     <td>{{.Preco}}</td> -->
-            <!--     <td>{{.Quantidade}}</td> -->
-            <!--     <td><a href="edit?id={{.Id}}" class="btn btn-info">Editar</a></td> -->
-            <!--     <td><button onclick="onDelete('{{.Id}}')" class="btn btn-danger">Deletar</button></td> -->
-            <!-- </tr> -->
-            <!-- {{end}} -->
+            {{range .}}
+            <tr>
+              <td>{{.Nome}}</td>
+              <td>{{.Descricao}}</td>
+              <td>{{.Preco}}</td>
+              <td>{{.Quantidade}}</td>
+              <td><a class="btn btn-info">Editar</a></td>
+              <td><button class="btn btn-danger">Deletar</button></td>
+            </tr>
+            {{end}}
           </tbody>
         </table>
       </div>
