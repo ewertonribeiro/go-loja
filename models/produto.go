@@ -9,6 +9,7 @@ type Produto struct {
 }
 
 func GetAllProducts() []Produto {
+
 	db := db.ConnectDB()
 	defer db.Close()
 
@@ -43,4 +44,30 @@ func GetAllProducts() []Produto {
 	}
 
 	return products
+}
+
+func CreateNewProduct(nome, descricao string, preco float64, quantidade int) {
+	db := db.ConnectDB()
+	defer db.Close()
+
+	insertDb, err := db.Prepare("INSERT INTO produtos (nome, descricao, preco, quantidade) VALUES ($1, $2, $3, $4)")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	insertDb.Exec(nome, descricao, preco, quantidade)
+
+}
+
+func DeleteProduct(id string) {
+	db := db.ConnectDB()
+	defer db.Close()
+
+	deleteProduct, err := db.Prepare("DELETE FROM produtos WHERE id=$1")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	deleteProduct.Exec(id)
+
 }
